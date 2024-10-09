@@ -5,7 +5,32 @@ on:
   workflow_dispatch:
 
 jobs:
+  preproc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: oss-cad-suite
+        uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2024-02-02'
+
+      - name: Run Yosys
+        run: |
+          mkdir build
+          yosys -s synth/tt.ys
+
+      - name: Upload preprocessed verilog
+        uses: actions/upload-artifact@v2
+        with:
+          name: exotiny_preproc
+          path: ./build/exotiny_preproc.v
+
   gds:
+    needs: preproc
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo

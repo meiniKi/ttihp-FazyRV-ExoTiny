@@ -15,5 +15,15 @@ jobs:
         with:
           submodules: recursive
 
+      - name: oss-cad-suite
+        uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2024-02-02'
+
+      - name: Run Yosys
+        run: |
+          mkdir build
+          yosys -s synth/tt.ys
+
       - name: FPGA bitstream for TT ASIC Sim (ICE40UP5K)
         uses: TinyTapeout/tt-gds-action/fpga/ice40up5k@tt09
