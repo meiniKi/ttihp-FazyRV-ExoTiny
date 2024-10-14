@@ -5,7 +5,6 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
 
 SRC_SOC 	= $(wildcard ../build/*.v)
 SRC_TT 		= $(wildcard ../src/*.v ../src/*.sv)
