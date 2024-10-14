@@ -38,6 +38,12 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Download preprocessed verilog
+        uses: actions/download-artifact@v4
+        with:
+          name: exotiny_preproc
+          path: ./build
+
       - name: Build GDS
         uses: TinyTapeout/tt-gds-action/orfs@tt09
 
